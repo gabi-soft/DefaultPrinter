@@ -24,3 +24,8 @@ jobs:
 
     - name: Publish application
       run: dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained false -o ./publish
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: publish/*.exe
