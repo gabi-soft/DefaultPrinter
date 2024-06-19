@@ -32,6 +32,7 @@ public partial class MainWindow
         void ValidateOnClick(object sender, RoutedEventArgs e)
         {
             SetDefaultPrinter(Printers.SelectedValue.ToString() ?? "");
+            Application.Current.Shutdown();
         }
 
         [DllImport("winspool.drv", CharSet = CharSet.Auto, SetLastError = true)]
