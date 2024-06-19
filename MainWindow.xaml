@@ -4,31 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Sélecteur d'imprimante par défaut" Height="250" Width="400" 
+        Title="Sélecteur d'imprimante par défaut" Height="250" Width="400"
         Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
     <Window.Resources>
         <!-- Styles for Windows 11 look -->
         <Style TargetType="ComboBox">
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="White" />
         </Style>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Background" Value="#0078D4"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="#0078D4" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Cursor" Value="Hand" />
         </Style>
     </Window.Resources>
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Text="Sélectionnez l'imprimante par défaut :" FontSize="16" FontWeight="Bold" Margin="10"/>
+        <TextBlock Text="Sélectionnez l'imprimante par défaut :" FontSize="16" FontWeight="Bold" Margin="10" />
         <ComboBox x:Name="Printers" Width="300" />
         <Button x:Name="Valider" Width="100">Valider</Button>
     </StackPanel>

@@ -7,14 +7,14 @@ namespace DefaultPrinter;
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class MainWindow
 {
     public MainWindow()
     {
         InitializeComponent();
 
-        string defaultPrinter = "";
-        List<string> _printers = new();
+        var defaultPrinter = "";
+        List<string> printers = [];
         var printerQuery = new ManagementObjectSearcher("SELECT * from Win32_Printer");
 
         foreach (var printer in printerQuery.Get())
@@ -22,19 +22,19 @@ public partial class MainWindow : Window
             var name = (string) printer.GetPropertyValue("Name");
             if ((bool) printer.GetPropertyValue("Default"))
                 defaultPrinter = name;
-            _printers.Add(name);
+            printers.Add(name);
         }
 
-        Printers.ItemsSource = _printers;
+        Printers.ItemsSource = printers;
         Printers.SelectedValue = defaultPrinter;
         Valider.Click += ValidateOnClick;
 
         void ValidateOnClick(object sender, RoutedEventArgs e)
         {
-            SetDefaultPrinter(Printers.SelectedValue.ToString());
+            SetDefaultPrinter(Printers.SelectedValue.ToString() ?? "");
         }
 
         [DllImport("winspool.drv", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern bool SetDefaultPrinter(string Printer);
+        static extern bool SetDefaultPrinter(string printer);
     }
 }
