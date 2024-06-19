@@ -1,0 +1,52 @@
+name: Publish and Release .NET 8 Application
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+        include-prerelease: true
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Publish application
+      run: dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained false -o ./publish
+
+    - name: Archive published files
+      run: |
+        mkdir -p release
+        cp -r ./publish/* ./release/
+      shell: bash
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./release
+        asset_name: release
+        asset_content_type: application/zip
