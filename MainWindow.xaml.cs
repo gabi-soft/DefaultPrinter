@@ -28,14 +28,14 @@ public partial class MainWindow
         Printers.ItemsSource = printers;
         Printers.SelectedValue = defaultPrinter;
         Valider.Click += ValidateOnClick;
-
-        void ValidateOnClick(object sender, RoutedEventArgs e)
-        {
-            SetDefaultPrinter(Printers.SelectedValue.ToString() ?? "");
-            Application.Current.Shutdown();
-        }
-
-        [DllImport("winspool.drv", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern bool SetDefaultPrinter(string printer);
+    }
+    
+    [DllImport("winspool.drv", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern bool SetDefaultPrinter(string printer);
+    
+    private void ValidateOnClick(object sender, RoutedEventArgs e)
+    {
+        SetDefaultPrinter(Printers.SelectedValue.ToString() ?? "");
+        Application.Current.Shutdown();
     }
 }
